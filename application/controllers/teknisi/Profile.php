@@ -7,8 +7,8 @@ class Profile extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        cekRole();
         is_login();
+        cekRole();
         date_default_timezone_set('Asia/Jakarta');
         $this->load->model('User_model', 'user');
         $this->load->model('Admin_model', 'admin');

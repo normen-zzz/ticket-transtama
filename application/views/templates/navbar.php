@@ -26,405 +26,22 @@
 				</div>
 			</li>
 
-			<li class="menu-item  ">
-				<a href="<?= base_url('dashboard') ?>" class='menu-link'>
-					<span><i class="bi bi-grid-fill"></i> Dashboard</span>
-				</a>
-			</li>
-
-			<!-- DATABASE role super Admin 1  dan admin 6  -->
-			<?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 6) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-database-fill"></i> DATABASE</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-
-								<li class="submenu-item">
-									<a href="<?= base_url('barang') ?>" class='submenu-link'>BARANG</a>
-
-
-								</li>
-
-								<li class="submenu-item">
-									<a href="<?= base_url('rack') ?>" class='submenu-link'>RACK</a>
-
-
-								</li>
-
-								<li class="submenu-item">
-									<a href="<?= base_url('customer') ?>" class='submenu-link'>CUSTOMER</a>
-
-
-								</li>
-							</ul>
-
-
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-
-			<!-- INBOUND  -->
-			<!-- untuk role admin 6 dan superadmin 1 -->
-			<?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 6) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> INBOUND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Picklist</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('picklist/add') ?>" class="subsubmenu-link">Add
-												Picklist</a>
-										</li>
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('picklist') ?>" class="subsubmenu-link">Data
-												Picklist</a>
-										</li>
-									</ul>
-
-								</li>
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Receiving Inbound</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('inbound') ?>" class="subsubmenu-link">Data
-												Inbound</a>
-										</li>
-									</ul>
-
-								</li>
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PUTAWAY</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('putaway') ?>" class="subsubmenu-link">Data Putaway</a>
-										</li>
-									</ul>
-
-								</li>
-							</ul>
-
-
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<!-- untuk role inbound 2 -->
-			<?php if ($this->session->userdata('role_id') == 2) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> INBOUND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Picklist</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('picklist') ?>" class="subsubmenu-link">Data
-												Picklist</a>
-										</li>
-									</ul>
-
-								</li>
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Receiving Inbound</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('inbound') ?>" class="subsubmenu-link">Data
-												Inbound</a>
-										</li>
-									</ul>
-
-								</li>
-
-
-							</ul>
-
-
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<!-- untuk role pick & put 4 -->
-			<?php if ($this->session->userdata('role_id') == 4) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> INBOUND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-
-
-
-
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PUTAWAY</a>
-									<!-- 3 Level Submenu PICKLIST -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('putaway') ?>" class="subsubmenu-link">Data Putaway</a>
-										</li>
-									</ul>
-
-								</li>
-							</ul>
-
-
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 6) : ?>
-				<!-- <li class="menu-item  ">
-				<a href="<?= base_url('user/stocktransfer') ?>" class='menu-link'>
-					<span><i class="bi bi-arrow-down-up"></i>Stock transfer</span>
-				</a>
-			</li> -->
-			<?php endif; ?>
-
-
-
-			<li class="menu-item  ">
-				<a href="<?= base_url('inventory') ?>" class='menu-link'>
-					<span><i class="bi bi-archive-fill"></i>INVENTORY</span>
-				</a>
-			</li>
-
-
-			<!-- OUTBOND  -->
-			<!-- OUTBOND Admin 6 dan superadmin 1 -->
-			<?php if ($this->session->userdata('role_id') == 6 || $this->session->userdata('role_id') == 1) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> OUTBOND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Purchase Order</a>
-
-
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('purchaseorder/add') ?>" class="subsubmenu-link">Add Purchase
-												Order</a>
-										</li>
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('purchaseorder') ?>" class="subsubmenu-link">Data Purchase
-												Order</a>
-										</li>
-
-									</ul>
-
-								</li>
-
-								<!-- <li class="submenu-item  has-sub">
-								<a href="#" class='submenu-link'>Goods Order</a>
-
-
-								3 Level Submenu
-								<ul class="subsubmenu">
-									<li class="subsubmenu-item ">
-										<a href="<?= base_url('goodsorder/add') ?>" class="subsubmenu-link">Add Goods
-											Order</a>
-									</li>
-
-									<li class="subsubmenu-item ">
-										<a href="<?= base_url('goodsorder') ?>" class="subsubmenu-link">Data Goods
-											Order</a>
-									</li>
-
-								</ul>
-
-							</li> -->
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PICKING SLIP</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('pickingslip') ?>" class="subsubmenu-link">Data Picking
-												Slip</a>
-										</li>
-
-									</ul>
-
-								</li>
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PACKING</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('packing') ?>" class="subsubmenu-link">Data Packing</a>
-										</li>
-
-									</ul>
-
-								</li>
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Delivery Order</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('user/deliveryorder') ?>" class="subsubmenu-link">Data
-												DO</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<!-- outbond role pick & put 4 -->
-			<?php if ($this->session->userdata('role_id') == 4) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> OUTBOND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PICKING SLIP</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('pickingslip') ?>" class="subsubmenu-link">Data Picking
-												Slip</a>
-										</li>
-
-									</ul>
-
-								</li>
-
-
-
-							</ul>
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<!-- users role superadmin 1 -->
 			<?php if ($this->session->userdata('role_id') == 1) : ?>
+				<li class="menu-item  ">
+					<a href="<?= base_url('admin/Dashboard') ?>" class='menu-link'>
+						<span><i class="bi bi-grid-fill"></i> Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item  ">
+					<a href="<?= base_url('admin/Ticket') ?>" class='menu-link'>
+						<span><i class="bi bi-ticket-detailed"></i> Ticket</span>
+					</a>
+				</li>
 				<li class="menu-item  ">
 					<a href="<?= base_url('users') ?>" class='menu-link'>
 						<span><i class="bi bi-person-fill"></i>USERS</span>
 					</a>
 				</li>
-			<?php endif; ?>
-
-			<!-- outbond role outbond  -->
-			<?php if ($this->session->userdata('role_id') == 3) : ?>
-				<li class="menu-item  has-sub">
-					<a href="#" class='menu-link'>
-						<span><i class="bi bi-file-earmark-medical-fill"></i> OUTBOND</span>
-					</a>
-					<div class="submenu ">
-						<!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-						<div class="submenu-group-wrapper">
-
-
-							<ul class="submenu-group">
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PICKING SLIP</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('pickingslip') ?>" class="subsubmenu-link">Data Picking
-												Slip</a>
-										</li>
-
-									</ul>
-
-								</li>
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>PACKING</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('packing') ?>" class="subsubmenu-link">Data Packing</a>
-										</li>
-
-									</ul>
-
-								</li>
-
-								<li class="submenu-item  has-sub">
-									<a href="#" class='submenu-link'>Delivery Order</a>
-									<!-- 3 Level Submenu -->
-									<ul class="subsubmenu">
-
-
-										<li class="subsubmenu-item ">
-											<a href="<?= base_url('user/deliveryorder') ?>" class="subsubmenu-link">Data
-												DO</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</li>
-			<?php endif; ?>
-
-			<?php if ($this->session->userdata('role_id') == 1) : ?>
 				<li class="menu-item  ">
 					<a href="<?= base_url('settings') ?>" class='menu-link'>
 						<span><i class="bi bi-gear"></i>SETTING</span>
@@ -432,7 +49,31 @@
 				</li>
 			<?php endif; ?>
 
+			<?php if ($this->session->userdata('role_id') == 2) : ?>
+				<li class="menu-item  ">
+					<a href="<?= base_url('teknisi/Dashboard') ?>" class='menu-link'>
+						<span><i class="bi bi-grid-fill"></i> Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item  ">
+					<a href="<?= base_url('teknisi/Ticket') ?>" class='menu-link'>
+						<span><i class="bi bi-ticket-detailed"></i> Ticket</span>
+					</a>
+				</li>
+			<?php endif; ?>
 
+			<?php if ($this->session->userdata('role_id') == 3) : ?>
+				<li class="menu-item  ">
+					<a href="<?= base_url('user/Dashboard') ?>" class='menu-link'>
+						<span><i class="bi bi-grid-fill"></i> Dashboard</span>
+					</a>
+				</li>
+				<li class="menu-item  ">
+					<a href="<?= base_url('user/Ticket') ?>" class='menu-link'>
+						<span><i class="bi bi-ticket-detailed"></i> Ticket</span>
+					</a>
+				</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </nav>

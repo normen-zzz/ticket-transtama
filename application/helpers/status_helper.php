@@ -53,9 +53,33 @@ function getStatusPickingslip($status)
 			return '<span class="badge bg-primary">Picked</span>';
 			break;
 
-			case '2':
-				return '<span class="badge bg-success">On Packing</span>';
-				break;
+		case '2':
+			return '<span class="badge bg-success">On Packing</span>';
+			break;
+
+		default:
+			# code...
+			break;
+	}
+}
+
+function getStatusTicket($status)
+{
+	switch ($status) {
+		case '0':
+			return '<span class="badge bg-secondary">Created</span>';
+			break;
+
+		case '1':
+			return '<span class="badge bg-primary">Processed</span>';
+			break;
+
+		case '2':
+			return '<span class="badge bg-success">Done</span>';
+			break;
+		case '3':
+			return '<span class="badge bg-danger">Decline</span>';
+			break;
 
 		default:
 			# code...

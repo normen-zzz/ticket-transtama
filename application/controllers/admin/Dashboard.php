@@ -19,13 +19,13 @@ class Dashboard extends CI_Controller {
             'subtitle' => 'Dashboard',
             'subtitle2' => 'Data dashboard',
             'users' => $this->user->getDetailUsers($this->session->userdata('id_users')),
-            'ticketCreated' => $this->db->get_where('ticket', ['status' => 0,'created_by' => $this->session->userdata('id_users')])->num_rows(),
-            'ticketOnProcess' => $this->db->get_where('ticket', ['status' => 1,'created_by' => $this->session->userdata('id_users')])->num_rows(),
-            'ticketFinish' => $this->db->get_where('ticket', ['status' => 2,'created_by' => $this->session->userdata('id_users')])->num_rows(),
+            'ticketCreated' => $this->db->get_where('ticket', ['status' => 0])->num_rows(),
+            'ticketOnProcess' => $this->db->get_where('ticket', ['status' => 1])->num_rows(),
+            'ticketFinish' => $this->db->get_where('ticket', ['status' => 2])->num_rows(),
         ];
 
         // Load the view and pass the data
-        $this->load->view('user/user/dashboard', $data);
+        $this->load->view('user/admin/dashboard', $data);
     }
 }
 ?>

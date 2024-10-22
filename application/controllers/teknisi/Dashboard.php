@@ -6,26 +6,24 @@ class Dashboard extends CI_Controller {
     public function __construct() {
         parent::__construct();
         // Load necessary models, libraries, etc.
-
+        $this->load->model('Teknisi_model','teknisi');
         $this->load->model('User_model','user');
         cekRole();
     }
 
     public function index() {
         // Load data from the model
-        
         $data = [
             'title' => 'Dashboard',
             'subtitle' => 'Dashboard',
             'subtitle2' => 'Data dashboard',
             'users' => $this->user->getDetailUsers($this->session->userdata('id_users')),
-            'ticketCreated' => $this->db->get_where('ticket', ['status' => 0,'created_by' => $this->session->userdata('id_users')])->num_rows(),
-            'ticketOnProcess' => $this->db->get_where('ticket', ['status' => 1,'created_by' => $this->session->userdata('id_users')])->num_rows(),
-            'ticketFinish' => $this->db->get_where('ticket', ['status' => 2,'created_by' => $this->session->userdata('id_users')])->num_rows(),
+            'ticketCreated' => $this->db->get_where('ticket', ['status' => 0,'handle_by' => $this->session->userdata('id_users')])->num_rows(),
+            'ticketOnProcess' => $this->db->get_where('ticket', ['status' => 1,'handle_by' => $this->session->userdata('id_users')])->num_rows(),
+            'ticketFinish' => $this->db->get_where('ticket', ['status' => 2,'handle_by' => $this->session->userdata('id_users')])->num_rows(),
         ];
-
         // Load the view and pass the data
-        $this->load->view('user/user/dashboard', $data);
+        $this->load->view('user/teknisi/dashboard', $data);
     }
 }
 ?>

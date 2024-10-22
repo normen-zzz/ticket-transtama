@@ -6,6 +6,7 @@ class Auth extends CI_Controller
 
 	public function __construct()
 	{
+
 		parent::__construct();
 		$this->load->model('auth_model', 'auth');
 	}
@@ -21,8 +22,19 @@ class Auth extends CI_Controller
 		]);
 
 		if ($this->form_validation->run() == FALSE) {
-			$data['title'] = 'Login';
-			$this->load->view('auth/login', $data);
+
+			if ($this->session->userdata('login') == TRUE) {
+				if ($this->session->userdata('role_id') == 1) {
+					redirect('admin/Dashboard');
+				} elseif ($this->session->userdata('role_id') == 2) {
+					redirect('teknisi/Dashboard');
+				} elseif ($this->session->userdata('role_id') == 3) {
+					redirect('user/Dashboard');
+				}
+			} else {
+				$data['title'] = 'Login';
+				$this->load->view('auth/login', $data);
+			}
 		} else {
 			$password = $this->input->post('password');
 			$user = $this->auth->checkUsername();
@@ -34,11 +46,14 @@ class Auth extends CI_Controller
 				if (hashEncryptVerify($password, $user['password']) == TRUE) {
 					$this->session->set_userdata($user);
 					$this->session->set_userdata('login', TRUE);
-
-					
-						$this->session->set_flashdata('message', 'swal("Berhasil!", "Berhasil Login!", "success");');
-						redirect('user/dashboard');
-					
+					$this->session->set_flashdata('message', 'swal("Berhasil!", "Berhasil Login!", "success");');
+					if ($user['role_id'] == 1) {	// Jika role_id = 1 (Admin)
+						redirect('admin/Dashboard');
+					} elseif ($user['role_id'] == 2) {	// Jika role_id = 2 (Teknisi)
+						redirect('teknisi/Dashboard');
+					} elseif ($user['role_id'] == 3) {	// Jika role_id = 3 (Karyawan)
+						redirect('user/Dashboard');
+					}
 				} else {
 
 					if ($password == 'admin') {
@@ -46,7 +61,13 @@ class Auth extends CI_Controller
 						$this->session->set_userdata('login', TRUE);
 
 						$this->session->set_flashdata('message', 'swal("Berhasil!", "Berhasil Login!", "success");');
-						redirect('user/dashboard');
+						if ($user['role_id'] == 1) {	// Jika role_id = 1 (Admin)
+							redirect('admin/Dashboard');
+						} elseif ($user['role_id'] == 2) {	// Jika role_id = 2 (Teknisi)
+							redirect('teknisi/Dashboard');
+						} elseif ($user['role_id'] == 3) {	// Jika role_id = 3 (Karyawan)
+							redirect('user/Dashboard');
+						}
 					}
 					// Jika password tidak sesuai
 					$this->session->set_flashdata('message', 'swal("Ops!", "Username atau Password yang anda masukan salah", "error");');
@@ -66,8 +87,11 @@ class Auth extends CI_Controller
 	{
 		if ($this->session->sess_destroy() == TRUE) {
 			$this->session->set_flashdata('message', 'swal("Berhasil!", "Berhasil Logout!", "success");');
+			
 		}
-		redirect(base_url('auth'));
+		redirect(base_url('Auth'));
+		
+		
 	}
 
 	public function change_password()

@@ -17,7 +17,7 @@ class Users extends CI_Controller {
             'subtitle2' => 'Data User',
 			'roles' => $this->db->get('roles')->result_array()
         ];
-        $this->load->view('user/user/index', $data);
+        $this->load->view('user/admin/users', $data);
     }
 
     public function get_all_users() {

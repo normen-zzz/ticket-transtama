@@ -7,4 +7,17 @@ function getNamaUserById($id_users) {
     return $user['nama'];
 }
 
+function cekRole() {
+
+    $CI =& get_instance();
+    if ($CI->session->userdata('role_id') == 2 && $CI->uri->segment(1) !== 'teknisi') {
+        redirect('auth');
+    } elseif ($CI->session->userdata('role_id') == 1 && $CI->uri->segment(1) != 'admin') {
+        redirect('auth');
+    } elseif ($CI->session->userdata('role_id') == 3 && $CI->uri->segment(1) != 'user') {
+        redirect('auth');
+    }
+    
+}
+
 ?>

@@ -18,8 +18,10 @@
                         <h6 class="user-dropdown-name"> <?= $this->session->userdata('nama') ?>  </h6>
                         <p class="user-dropdown-status text-sm text-muted"><?php if ($this->session->userdata('role_id') == 1) {
                             echo 'Admin';
-                        } else{
-                            echo 'User';
+                        } elseif ($this->session->userdata('role_id') == 2) {
+                            echo 'Teknisi';
+                        }else{
+                            echo 'Karyawan';
                         } ?></p>
                     </div>
                 </a>
@@ -28,7 +30,7 @@
                     </li>
                     
                     
-                    <li><a class="dropdown-item" href="<?= base_url('user/Users/Logout') ?>">Logout</a></li>
+                    <li><a class="dropdown-item" href="<?= base_url('Auth/logout') ?>">Logout</a></li>
                 </ul>
             </div>
 
