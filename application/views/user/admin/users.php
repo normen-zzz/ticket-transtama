@@ -120,7 +120,7 @@
 										
 											<option value="TLX">TLX</option>
 											<option value="TAB">TAB</option>
-											<option value="TLX">TLX</option>
+											<option value="GSA">GSA</option>
 									
 									</select>
 								</div>
@@ -179,7 +179,7 @@
 											<option value="-">-</option>
 											<option value="TLX">TLX</option>
 											<option value="TAB">TAB</option>
-											<option value="TLX">TLX</option>
+											<option value="GSA">GSA</option>
 									
 									</select>
 								</div>
