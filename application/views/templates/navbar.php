@@ -38,7 +38,7 @@
 					</a>
 				</li>
 				<li class="menu-item  ">
-					<a href="<?= base_url('users') ?>" class='menu-link'>
+					<a href="<?= base_url('admin/Users') ?>" class='menu-link'>
 						<span><i class="bi bi-person-fill"></i>USERS</span>
 					</a>
 				</li>
