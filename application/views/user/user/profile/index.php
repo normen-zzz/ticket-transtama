@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="<?= base_url() . '/' ?>assets/compiled/css/app.css" />
     <link rel="stylesheet" href="<?= base_url() . '/' ?>assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="<?= base_url() . '/' ?>assets/compiled/css/iconly.css" />
-    <link rel="stylesheet" href="<?= base_url() . '/' ?>assets/extensions/sweetalert2/sweetalert2.min.css">
+    <!-- sweetalert2 cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11" />
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                                             <form id="editProfile" class="form form-vertical">
                                                 <div class="form-body">
                                                     <div class="row">
-                                                    <div class="col-12">
+                                                        <div class="col-12">
                                                             <div class="form-group has-icon-left">
                                                                 <label for="email-id-icon">Username</label>
                                                                 <div class="position-relative">
@@ -72,12 +73,12 @@
                                                                 <label for="first-name-icon">Company</label>
                                                                 <div class="position-relative">
 
-                                                                   <select name="company" class="form-control" id="company">
+                                                                    <select name="company" class="form-control" id="company">
                                                                         <option value="<?= $users['company'] ?>"><?= $users['company'] ?></option>
                                                                         <option value="TLX">TLX</option>
                                                                         <option value="TAB">TAB</option>
                                                                         <option value="GSA">GSA</option>
-                                                                   </select>
+                                                                    </select>
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-building"></i>
                                                                     </div>
@@ -86,7 +87,7 @@
                                                         </div>
 
 
-                                                
+
                                                         <div class="col-12">
                                                             <div class="form-group has-icon-left">
                                                                 <label for="password-id-icon">Password</label>
@@ -98,6 +99,27 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-12">
+                                                            <div class="form-group has-icon-left">
+                                                                <label for="first-name-icon">Photo</label>
+                                                                <div class="position-relative">
+                                                                    <input type="file" class="form-control" id="photoProfile" accept="image/*" onchange="handleImageUpload(event);" placeholder="Input with icon left" id="first-name-icon">
+                                                                    <input type="file" name="photo" id="photoProfileCompressed" hidden>
+                                                                    <div class="form-control-icon">
+                                                                        <i class="bi bi-person"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <!-- preview for image  -->
+                                                            <div id="previewImage">
+
+                                                            </div>
+                                                        </div>
+
 
 
                                                         <div class="col-12 d-flex justify-content-end">
@@ -126,6 +148,146 @@
     <script src="<?= base_url() . '/' ?>assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="<?= base_url() . '/' ?>assets/compiled/js/app.js"></script>
+    <!-- cdn jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Compress Image photoProfile  cdn -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
+
+    <!-- sweetalert2 cdn  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function handleImageUpload(event) {
+
+            // swal loading 
+            Swal.fire({
+                title: 'Loading',
+                html: 'Please wait,Compressing Image',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                // cant close 
+                showConfirmButton: false,
+                showCancelButton: false,
+                allowOutsideClick: false,
+            })
+
+            var imageFile = event.target.files[0];
+            console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+            console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+            var options = {
+                maxSizeMB: 0.1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true
+            }
+            imageCompression(imageFile, options)
+                .then(function(compressedFile) {
+                    console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                    console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+                    // set compressedFile into photoProfileCompressed
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(new File([compressedFile], compressedFile.name));
+                    document.getElementById('photoProfileCompressed').files = dataTransfer.files;
+                    Swal.close();
+                    // show image on previewImage
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(compressedFile);
+                    img.width = 200;
+                    img.height = 200;
+                    previewImage.appendChild(img);
+                    // add text preview image 
+                    const text = document.createElement('p');
+                    text.innerHTML = 'Preview Image';
+                    previewImage.appendChild(text);
+
+                })
+                .catch(function(error) {
+                    console.log(error.message);
+                });
+        }
+    </script>
+
+    <script>
+        // editProfile ajax post contain photo
+        $('#editProfile').submit(function(e) {
+            e.preventDefault();
+            // swal loading 
+            Swal.fire({
+                title: 'Loading',
+                html: 'Please wait,submitting data',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                // cant close 
+                showConfirmButton: false,
+                showCancelButton: false,
+                allowOutsideClick: false,
+            })
+            var formData = new FormData(this);
+            console.log(formData);
+            
+            $.ajax({
+                url: '<?= base_url('user/profile/editProfile') ?>',
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    var data = JSON.parse(data);
+                    if (data.status == 'success') {
+                        console.log('success');
+                        
+                    //    swal success 
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // swal showLoading 
+                                Swal.fire({
+                                    title: 'Loading',
+                                    html: 'Please wait,Reloading page',
+                                    timerProgressBar: true,
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                    // cant close 
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                })
+                                
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        console.log('error');
+                        
+                        // swal error 
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message,
+                        })
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    </script>
+
+
+
+
+
 
 </body>
 
