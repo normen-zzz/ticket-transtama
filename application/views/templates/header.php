@@ -17,11 +17,11 @@
                     <div class="text">
                         <h6 class="user-dropdown-name"> <?= $this->session->userdata('nama') ?>  </h6>
                         <p class="user-dropdown-status text-sm text-muted"><?php if ($this->session->userdata('role_id') == 1) {
-                            echo 'Admin';
+                            echo 'Admin of '.$this->session->userdata('company');
                         } elseif ($this->session->userdata('role_id') == 2) {
-                            echo 'Teknisi';
+                            echo 'Technician of '.$this->session->userdata('company');
                         }else{
-                            echo 'Karyawan';
+                            echo 'Employee of '.$this->session->userdata('company');
                         } ?></p>
                     </div>
                 </a>
