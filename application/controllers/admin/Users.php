@@ -49,6 +49,10 @@ class Users extends CI_Controller {
 			'required' => 'Konfirmasi password harus diisi.',
 			'matches' => 'Konfirmasi password tidak cocok dengan password.'
 		]);
+		// company
+		$this->form_validation->set_rules('company', 'Company', 'required', [
+			'required' => 'Company harus diisi.'
+		]);
 		$this->form_validation->set_rules('role_id', 'Role ID', 'required|integer', [
 			'required' => 'Role harus diisi.',
 			'integer' => 'Role harus berupa angka.'
@@ -63,8 +67,8 @@ class Users extends CI_Controller {
 		$data = [
 			'username' => $this->input->post('username'),
 			'nama' => $this->input->post('nama'),
-			
 			'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+			'company' => $this->input->post('company'),
 			'role_id' => $this->input->post('role_id'),
 			'created_at' => date('Y-m-d H:i:s'),
 		];
@@ -81,6 +85,7 @@ class Users extends CI_Controller {
         $data = [
             'nama' => $this->input->post('nama'),
             'username' => $this->input->post('username'),
+			'company' => $this->input->post('company'),
             'role_id' => $this->input->post('role_id'),
         ];
 		if ($this->input->post('password')) {

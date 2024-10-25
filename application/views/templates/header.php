@@ -26,8 +26,15 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
-                    <li><a class="dropdown-item" href="<?= base_url('user/Profile') ?>">My Account</a></li>
-                    </li>
+                    <?php if ($this->session->userdata('role_id') == 1) { ?>
+                        <li><a class="dropdown-item" href="<?= base_url('admin/Profile') ?>">My Account</a></li>
+                   <?php } elseif ($this->session->userdata('role_id') == 2) { ?>
+                        <li><a class="dropdown-item" href="<?= base_url('teknisi/Profile') ?>">My Account</a></li>
+                     <?php }else{ ?>
+                        <li><a class="dropdown-item" href="<?= base_url('user/Profile') ?>">My Account</a></li>
+                   <?php } ?>
+                    
+                 
                     
                     
                     <li><a class="dropdown-item" href="<?= base_url('Auth/logout') ?>">Logout</a></li>

@@ -63,6 +63,7 @@
 														<th>Username</th>
 														<th>Name</th>
 														<th>Role</th>
+														<th>Company</th>
 														<th>Actions</th>
 													</tr>
 												</thead>
@@ -114,6 +115,17 @@
 								</div>
 
 								<div class="form-group">
+									<label for="edit_company">Company</label>
+									<select class="form-control" name="company" required>
+										
+											<option value="TLX">TLX</option>
+											<option value="TAB">TAB</option>
+											<option value="TLX">TLX</option>
+									
+									</select>
+								</div>
+
+								<div class="form-group">
 									<label for="confirm_password">Confirm Password</label>
 									<div class="input-group">
 										<input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
@@ -159,6 +171,17 @@
 								<div class="form-group">
 									<label for="edit_nama">Name</label>
 									<input type="text" class="form-control" name="nama" id="edit_nama" required>
+								</div>
+
+								<div class="form-group">
+									<label for="edit_company">Company</label>
+									<select class="form-control" name="company"  id="edit_company" required>
+											<option value="-">-</option>
+											<option value="TLX">TLX</option>
+											<option value="TAB">TAB</option>
+											<option value="TLX">TLX</option>
+									
+									</select>
 								</div>
 								
 								
@@ -274,6 +297,7 @@
 								<td>${user.username}</td>
 								<td>${user.nama}</td>
 								<td>${user.role_name}</td>
+								<td>${user.company}</td>
 								<td>
 									<button class="btn btn-warning btn-sm edit-user" data-id="${user.id_users}">Edit</button>
 									<button class="btn btn-danger btn-sm delete-user" data-id="${user.id_users}">Delete</button>
@@ -301,6 +325,7 @@
 						$('#editUserId').val(response.id_users);
 						$('#edit_nama').val(response.nama);
 						$('#edit_username').val(response.username);
+						$('#edit_company').val(response.company);
 						$('#edit_role_id').val(response.role_id);
 						$('#editUserModal').modal('show');
 					},
