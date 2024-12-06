@@ -65,5 +65,19 @@ class Ticket_model extends CI_Model {
         $this->db->where('id_ticket', $id_ticket);
         $this->db->update('ticket', $data);
     }
+
+    // getTicketExport
+    public function getTicketExport()
+    {
+        $this->db->select('a.*, b.nama AS karyawan, c.name_category, d.nama AS teknisi');
+        $this->db->from('ticket a');
+        $this->db->join('users b', 'a.created_by = b.id_users');
+        // join category 
+        $this->db->join('category c', 'a.category = c.id_category');
+        // join users 
+        $this->db->join('users d', 'a.handle_by = d.id_users', 'left');
+        $this->db->order_by('a.id_ticket', 'DESC');
+        return $this->db->get();
+    }
 }
 

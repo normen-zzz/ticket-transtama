@@ -52,6 +52,8 @@
 
                                     </div>
 
+                                    <a href="<?= base_url('admin/ticket/exportTicket') ?>" class="btn btn-primary">Export</a>
+
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table" id="tblTicket">
