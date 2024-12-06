@@ -105,7 +105,7 @@
                                                                 <label for="first-name-icon">Photo</label>
                                                                 <div class="position-relative">
                                                                     <input type="file" class="form-control" id="photoProfile" accept="image/*" onchange="handleImageUpload(event);" placeholder="Input with icon left" id="first-name-icon">
-                                                                    <input type="file" name="photo" id="photoProfileCompressed" hidden>
+                                                                    <input type="file" name="foto" id="photoProfileCompressed" hidden>
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-person"></i>
                                                                     </div>
@@ -142,14 +142,15 @@
             <?php $this->load->view('templates/footer') ?>
         </div>
     </div>
+     <!-- cdn jquery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="<?= base_url() . '/' ?>assets/static/js/components/dark.js"></script>
     <script src="<?= base_url() . '/' ?>assets/static/js/pages/horizontal-layout.js"></script>
     <script src="<?= base_url() . '/' ?>assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="<?= base_url() . '/' ?>assets/compiled/js/app.js"></script>
-    <!-- cdn jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
 
     <!-- Compress Image photoProfile  cdn -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
@@ -232,7 +233,7 @@
             })
             var formData = new FormData(this);
             console.log(formData);
-            
+
             $.ajax({
                 url: '<?= base_url('user/profile/editProfile') ?>',
                 type: 'POST',
@@ -241,8 +242,8 @@
                     var data = JSON.parse(data);
                     if (data.status == 'success') {
                         console.log('success');
-                        
-                    //    swal success 
+
+                        //    swal success 
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -262,13 +263,13 @@
                                     showCancelButton: false,
                                     allowOutsideClick: false,
                                 })
-                                
+
                                 location.reload();
                             }
                         })
                     } else {
                         console.log('error');
-                        
+
                         // swal error 
                         Swal.fire({
                             icon: 'error',
