@@ -35,100 +35,93 @@
                         <div class="row match-height">
 
                             <div class="col">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title"><?= $subtitle2 ?></h4>
+                                <div class="card shadow-sm">
+                                    <div class="card-header" style="background-color: #9F2840; color: white;">
+                                        <h4 class="card-title m-0"><?= $subtitle2 ?></h4>
                                     </div>
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <form id="editProfile" class="form form-vertical">
-                                                <div class="form-body">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="email-id-icon">Username</label>
-                                                                <div class="position-relative">
-                                                                    <input type="text" class="form-control" value="<?= $users['username'] ?>" name="username" placeholder="Email" readonly id="email-id-icon">
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-envelope"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Name</label>
-                                                                <div class="position-relative">
-
-                                                                    <input type="text" class="form-control" name="nama" value="<?= $users['nama'] ?>" placeholder="Input with icon left" id="first-name-icon">
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Company</label>
-                                                                <div class="position-relative">
-
-                                                                    <select name="company" class="form-control" id="company">
-                                                                        <option value="<?= $users['company'] ?>"><?= $users['company'] ?></option>
-                                                                        <option value="TLX">TLX</option>
-                                                                        <option value="TAB">TAB</option>
-                                                                        <option value="GSA">GSA</option>
-                                                                    </select>
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-building"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="password-id-icon">Password</label>
-                                                                <div class="position-relative">
-                                                                    <input type="password" class="form-control" name="password" placeholder="Isi jika ingin mengubah password" id="password-id-icon">
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-lock"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Photo</label>
-                                                                <div class="position-relative">
-                                                                    <input type="file" class="form-control" id="photoProfile" accept="image/*" onchange="handleImageUpload(event);" placeholder="Input with icon left" id="first-name-icon">
-                                                                    <input type="file" name="foto" id="photoProfileCompressed" hidden>
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <!-- preview for image  -->
-                                                            <div id="previewImage">
-
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div class="col-12 d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                        </div>
+                                            <div class="row mb-4">
+                                                <div class="col-md-4 text-center">
+                                                    <!-- Current Profile Image Display -->
+                                                    <div class="avatar avatar-xl mb-3 mx-auto">
+                                                        
+                                                            <img src="<?= base_url() . '/' ?>images/users/<?= $this->session->userdata('photo') ?>" alt="Default Profile" class="rounded-circle img-thumbnail">
+                                                       
                                                     </div>
+                                                    <h5><?= $users['nama'] ?></h5>
+                                                    <p class="text-muted"><?= $users['company'] ?></p>
+                                                    <div id="previewImage" class="mt-3"></div>
                                                 </div>
-                                            </form>
+                                                <div class="col-md-8">
+                                                    <form id="editProfile" class="form form-vertical">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-group">
+                                                                        <label for="email-id-icon" class="text-uppercase fw-bold" style="color: #9F2840;"><i class="bi bi-person-badge me-1"></i> Username</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="text" class="form-control form-control-lg bg-light" value="<?= $users['username'] ?>" name="username" placeholder="Email" readonly id="email-id-icon">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-group">
+                                                                        <label for="first-name-icon" class="text-uppercase fw-bold" style="color: #9F2840;"><i class="bi bi-person me-1"></i> Name</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="text" class="form-control form-control-lg" name="nama" value="<?= $users['nama'] ?>" placeholder="Enter your name">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-group">
+                                                                        <label for="company" class="text-uppercase fw-bold" style="color: #9F2840;"><i class="bi bi-building me-1"></i> Company</label>
+                                                                        <div class="position-relative">
+                                                                            <select name="company" class="form-control form-control-lg" id="company">
+                                                                                <option value="<?= $users['company'] ?>" selected><?= $users['company'] ?></option>
+                                                                                <option value="TLX">TLX</option>
+                                                                                <option value="TAB">TAB</option>
+                                                                                <option value="GSA">GSA</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-group">
+                                                                        <label for="password-id-icon" class="text-uppercase fw-bold" style="color: #9F2840;"><i class="bi bi-lock me-1"></i> Password</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="password" class="form-control form-control-lg" name="password" placeholder="Fill only if you want to change password">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-group">
+                                                                        <label for="photoProfile" class="text-uppercase fw-bold" style="color: #9F2840;"><i class="bi bi-image me-1"></i> Profile Photo</label>
+                                                                        <div class="input-group">
+                                                                            <input type="file" class="form-control form-control-lg" id="photoProfile" accept="image/*" onchange="handleImageUpload(event);">
+                                                                            <button class="btn" style="background-color: #9F2840; color: white;" type="button" onclick="document.getElementById('photoProfile').click()">Browse</button>
+                                                                            <input type="file" name="foto" id="photoProfileCompressed" hidden>
+                                                                        </div>
+                                                                        <small class="text-muted">Max file size: 2MB (JPG, PNG)</small>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 d-flex justify-content-end mt-4">
+                                                                    <button type="reset" class="btn btn-light-secondary me-2 px-4">
+                                                                        <i class="bi bi-x-circle me-1"></i> Reset
+                                                                    </button>
+                                                                    <button type="submit" class="btn px-4" style="background-color: #9F2840; color: white;">
+                                                                        <i class="bi bi-save me-1"></i> Save Changes
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

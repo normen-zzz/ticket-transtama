@@ -24,58 +24,66 @@
 
             <div class="content-wrapper container">
                 <div class="page-heading">
-                    <h3><?= $subtitle ?></h3>
+                    <h3 class="text-secondary mb-4"><?= $subtitle ?></h3>
                 </div>
                 <div class="page-content">
                     <section class="row">
-                        <div class="col-12 col-lg-12">
+                        <div class="col-12">
                             <div class="row">
-                                
-                                
-                                <div class="col-4 col-lg-4 col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Tickets Created</h6>
-                                                    <h6 class="font-extrabold mb-0"><?= $ticketCreated ?></h6>
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="card shadow-sm" style="border-top: 4px solid #9F2840; border-radius: 8px;">
+                                        <div class="card-body py-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-xl bg-light-danger">
+                                                    <span class="avatar-content">
+                                                        <i class="bi bi-ticket-fill text-danger" style="color: #9F2840 !important;"></i>
+                                                    </span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-4 col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Tickets On Process</h6>
-                                                    <h6 class="font-extrabold mb-0"><?= $ticketOnProcess ?></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-4 col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Tickets Done</h6>
-                                                    <h6 class="font-extrabold mb-0"><?= $ticketFinish ?></h6>
+                                                <div class="ms-3 name">
+                                                    <h5 class="font-bold" style="color: #9F2840;">Tickets Created</h5>
+                                                    <h2 class="font-extrabold mb-0"><?= $ticketCreated ?></h2>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="card shadow-sm" style="border-top: 4px solid #FFC107; border-radius: 8px;">
+                                        <div class="card-body py-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-xl bg-light-warning">
+                                                    <span class="avatar-content">
+                                                        <i class="bi bi-hourglass-split text-warning"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="ms-3 name">
+                                                    <h5 class="font-bold text-warning">Tickets On Process</h5>
+                                                    <h2 class="font-extrabold mb-0"><?= $ticketOnProcess ?></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
-                                
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="card shadow-sm" style="border-top: 4px solid #28A745; border-radius: 8px;">
+                                        <div class="card-body py-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-xl bg-light-success">
+                                                    <span class="avatar-content">
+                                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="ms-3 name">
+                                                    <h5 class="font-bold text-success">Tickets Done</h5>
+                                                    <h2 class="font-extrabold mb-0"><?= $ticketFinish ?></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                           
                         </div>
                     </section>
                 </div>
@@ -90,52 +98,7 @@
 
     <script src="<?= base_url().'/' ?>assets/compiled/js/app.js"></script>
 
-    <script src="<?= base_url().'/' ?>assets/extensions/apexcharts/apexcharts.min.js"></script>
-	<script>
-    var incomingItemsData = <?php echo $incoming_chart_data; ?>;
-    var outgoingItemsData = <?php echo $outgoing_chart_data; ?>;
-	
-    var monthsIncoming = <?php echo $incoming_months; ?>;
-    var monthsOutgoing = <?php echo $outgoing_months; ?>;
-
-    var optionsIncoming = {
-        series: [{
-            name: "Barang Masuk",
-            data: incomingItemsData,
-        }],
-        chart: {
-            type: "bar",
-            height: 300,
-        },
-        xaxis: {
-            categories: monthsIncoming,
-        },
-        fill: {
-            opacity: 1,
-        },
-    };
-
-    var optionsOutgoing = {
-        series: [{
-            name: "Barang Keluar",
-            data: outgoingItemsData,
-        }],
-        chart: {
-            type: "bar",
-            height: 300,
-        },
-		colors : ['#FF4560'],
-        xaxis: {
-            categories: monthsOutgoing,
-        },
-        fill: {
-            opacity: 1,
-        },
-    };
-
-    new ApexCharts(document.querySelector("#chart-incoming-items"), optionsIncoming).render();
-    new ApexCharts(document.querySelector("#chart-outgoing-items"), optionsOutgoing).render();
-</script>
+    
 
 </body>
 
