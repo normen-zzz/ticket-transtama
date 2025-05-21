@@ -32,80 +32,105 @@
             </header>
 
             <div class="content-wrapper container">
-                <div class="page-heading">
-                    <h3><?= $subtitle ?></h3>
+                <div class="page-heading d-flex justify-content-between align-items-center">
+                    <h3 class="fw-bold" style="color: #9F2840;"><?= $subtitle ?></h3>
+                    <button type="button" class="btn btn-lg" style="background-color: #9F2840; color: white;" data-bs-toggle="modal" data-bs-target="#addTicket">
+                        <i class="bi bi-plus-circle me-2"></i>Create New Ticket
+                    </button>
                 </div>
+                
                 <div class="page-content">
-                    <!-- Basic Vertical form layout section start -->
-                    <section id="basic-vertical-layouts">
-                        <div class="row match-height">
-
-                            <div class="col">
-                                <!-- Minimal jQuery Datatable end -->
-                                <!-- Basic Tables start -->
-
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">
-                                            <?= $subtitle2 ?>
-                                        </h5>
-                                        <!-- button for trigger modal -->
-                                        <button type="button" class="btn" style="background-color: #9F2840; color: white;" data-bs-toggle="modal" data-bs-target="#addTicket">
-                                            Add Ticket
-                                        </button>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table" id="tblTicket">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Category</th>
-                                                        <th>Title</th>
-                                                        <th>Created At</th>
-                                                        <th>Created By</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 1;
-                                                    foreach ($ticket->result_array() as $ticket1) { ?>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td><?= $ticket1['name_category'] ?></td>
-                                                            <td><?= $ticket1['title'] ?></td>
-                                                            <td><?= $ticket1['created_at'] ?></td>
-                                                            <td><?= $ticket1['karyawan'] ?></td>
-                                                            <td><?= getStatusTicket($ticket1['status']) ?></td>
-                                                            <td>
-                                                                <!-- button modal detail  -->
-                                                                <button type="button" class="btn" style="background-color: #9F2840; color: white;" data-bs-toggle="modal" data-bs-target="#detailTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
-                                                                    Detail
-                                                                </button>
-                                                                <!-- button receiveTicket -->
-                                                                <?php if ($ticket1['status'] == '0') { ?>
-                                                                    <button type="button" class="btn btn-danger cancelTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
-                                                                        Cancel
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </td>
-                                                        </tr>
-                                                    <?php $no++;
-                                                    } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title fw-bold" style="color: #9F2840;">
+                                        <i class="bi bi-ticket-detailed me-2"></i><?= $subtitle2 ?>
+                                    </h5>
+                                    
                                 </div>
 
-
-                                <!-- Basic Tables end -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tblTicket">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Category</th>
+                                                    <th>Title</th>
+                                                    <th>Created At</th>
+                                                    <th>Created By</th>
+                                                    <th>Status</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1;
+                                                foreach ($ticket->result_array() as $ticket1) { ?>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <span class="badge bg-light-secondary"><?= $ticket1['name_category'] ?></span>
+                                                        </td>
+                                                        <td class="fw-bold"><?= $ticket1['title'] ?></td>
+                                                        <td><?= $ticket1['created_at'] ?></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar avatar-sm me-2">
+                                                                    <div class="avatar-text rounded-circle bg-light-primary">
+                                                                        <?= strtoupper(substr($ticket1['karyawan'], 0, 1)) ?>
+                                                                    </div>
+                                                                </div>
+                                                                <?= $ticket1['karyawan'] ?>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <?= getStatusTicket($ticket1['status']) ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="d-flex justify-content-center gap-3">
+                                                                <button type="button" class="btn btn-sm px-3" 
+                                                                    style="background-color: #9F2840; color: white;" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#detailTicket" 
+                                                                    data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                    <i class="bi bi-eye fw-bold me-1"></i> View
+                                                                </button>
+                                                                
+                                                                <?php if ($ticket1['status'] == '0') { ?>
+                                                                    <button type="button" class="btn btn-sm btn-danger shadow-sm px-3 cancelTicket" 
+                                                                        data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                        <i class="bi bi-x-circle fw-bold me-1"></i> Cancel
+                                                                    </button>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php $no++;
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </section>
-                    <!-- // Basic Vertical form layout section end -->
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="alert" style="background-color: rgba(159, 40, 64, 0.1);">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-info-circle" style="color: #9F2840; font-size: 1.5rem;"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="alert-heading" style="color: #9F2840;">Need help?</h6>
+                                        <p class="mb-0">If you have any questions about using the ticket system, please contact our support team.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
