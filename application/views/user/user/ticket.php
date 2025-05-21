@@ -50,12 +50,9 @@
                                             <?= $subtitle2 ?>
                                         </h5>
                                         <!-- button for trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTicket">
+                                        <button type="button" class="btn" style="background-color: #9F2840; color: white;" data-bs-toggle="modal" data-bs-target="#addTicket">
                                             Add Ticket
                                         </button>
-
-
-
                                     </div>
 
                                     <div class="card-body">
@@ -70,7 +67,6 @@
                                                         <th>Created By</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -85,19 +81,15 @@
                                                             <td><?= getStatusTicket($ticket1['status']) ?></td>
                                                             <td>
                                                                 <!-- button modal detail  -->
-                                                                <button type="button" class="btn btn-primary detailTicket" data-bs-toggle="modal" data-bs-target="#detailTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                <button type="button" class="btn" style="background-color: #9F2840; color: white;" data-bs-toggle="modal" data-bs-target="#detailTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
                                                                     Detail
                                                                 </button>
                                                                 <!-- button receiveTicket -->
                                                                 <?php if ($ticket1['status'] == '0') { ?>
-
                                                                     <button type="button" class="btn btn-danger cancelTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
                                                                         Cancel
                                                                     </button>
                                                                 <?php } ?>
-
-
-
                                                             </td>
                                                         </tr>
                                                     <?php $no++;
@@ -123,87 +115,87 @@
 
     <!-- Modal Detail Ticket -->
     <div class="modal fade" id="detailTicket" tabindex="-1" aria-labelledby="detailTicketLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailTicketLabel">Detail Ticket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #9F2840;">
+                    <h5 class="modal-title fw-bold text-white" id="detailTicketLabel">
+                        <i class="bi bi-ticket-detailed me-2"></i>Ticket Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <!-- show data by ajax  -->
-                    <div class="row">
-                        <div class="col-4">
-                            <label for="category" class="form-label">Category</label>
+                <div class="modal-body p-4">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                            <h5 id="title" class="card-title mb-0 fw-bold" style="color: #9F2840;"></h5>
+                            <span class="badge" style="background-color: #9F2840;" id="category"></span>
                         </div>
-                        <div class="col-8">
-                            <p id="category"></p>
+                        <div class="p-3 bg-light rounded border shadow-sm">
+                            <h6 class="fw-bold text-secondary mb-2">
+                                <i class="bi bi-card-text me-2" style="color: #9F2840;"></i>Description
+                            </h6>
+                            <div id="description" class="mb-0 description-content"></div>
+                        </div>
+                        <div class="card-body">
+                            <hr class="my-4">
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-secondary mb-3">Ticket Information</h6>
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-person-circle me-2" style="color: #9F2840;"></i>
+                                            <span class="fw-semibold">Created By:</span>
+                                        </div>
+                                        <p id="created_by" class="mb-0 ms-4"></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-calendar-plus me-2" style="color: #9F2840;"></i>
+                                            <span class="fw-semibold">Created At:</span>
+                                        </div>
+                                        <p id="created_at" class="mb-0 ms-4"></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-secondary mb-3">Processing Timeline</h6>
+                                    <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-send me-2" style="color: #9F2840;"></i>
+                                            <span class="fw-semibold">Assigned:</span>
+                                        </div>
+                                        <p id="assign_at" class="mb-0 ms-4"></p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-check-circle me-2 text-success"></i>
+                                            <span class="fw-semibold">Received:</span>
+                                        </div>
+                                        <p id="receive_at" class="mb-0 ms-4"></p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-x-circle me-2 text-danger"></i>
+                                            <span class="fw-semibold">Declined:</span>
+                                        </div>
+                                        <p id="decline_at" class="mb-0 ms-4"></p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-flag-fill me-2 text-success"></i>
+                                            <span class="fw-semibold">Completed:</span>
+                                        </div>
+                                        <p id="finish_at" class="mb-0 ms-4"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- title  -->
-                    <div class="row">
-                        <div class="col-4">
-                            <label for="title" class="form-label">Title</label>
-                        </div>
-                        <div class="col-8">
-                            <p id="title"></p>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="description" class="form-label">Description</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="description"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_at" class="form-label">Created At</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="created_at"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_by" class="form-label">Created By</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="created_by"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_by" class="form-label">Assign At</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="assign_at"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_by" class="form-label">Receive At</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="receive_at"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_by" class="form-label">Decline At</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="decline_at"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="created_by" class="form-label">Finish At</label>
-                            </div>
-                            <div class="col-8">
-                                <p id="finish_at"></p>
-                            </div>
-                        </div>
-
+                    
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-2"></i>Close
+                        </button>
                     </div>
                 </div>
             </div>
@@ -215,30 +207,57 @@
     <div class="modal fade" id="addTicket" tabindex="-1" aria-labelledby="addTicketLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addTicketLabel">Add Ticket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #9F2840;">
+                    <h5 class="modal-title text-white fw-bold" id="addTicketLabel">
+                        <i class="bi bi-plus-circle me-2"></i>Create New Ticket
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="formAddTicket">
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <select class="form-select" id="category" name="category">
-                                <option selected disabled>Choose...</option>
+                <div class="modal-body p-4">
+                    <form id="formAddTicket" class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <label for="category" class="form-label fw-semibold">
+                                <i class="bi bi-tag me-2" style="color: #9F2840;"></i>Category
+                            </label>
+                            <select class="form-select shadow-sm" id="category" name="category" required>
+                                <option selected disabled value="">Select a category...</option>
                                 <?php foreach ($category->result_array() as $category1) { ?>
                                     <option value="<?= $category1['id_category'] ?>"><?= $category1['name_category'] ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="invalid-feedback">
+                                Please select a ticket category.
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title">
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-semibold">
+                                <i class="bi bi-card-heading me-2" style="color: #9F2840;"></i>Title
+                            </label>
+                            <input type="text" class="form-control shadow-sm" id="title" name="title" placeholder="Brief description of the issue" required>
+                            <div class="invalid-feedback">
+                                Please provide a ticket title.
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-semibold">
+                                <i class="bi bi-card-text me-2" style="color: #9F2840;"></i>Description
+                            </label>
+                            <textarea class="form-control shadow-sm" id="description" name="description" rows="5" placeholder="Provide detailed information about your issue..." required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a description.
+                            </div>
+                            <small class="form-text text-muted">
+                                Please include all relevant details to help us resolve your issue faster.
+                            </small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn" style="background-color: #9F2840; color: white;">
+                                <i class="bi bi-send me-2"></i>Submit Ticket
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -292,12 +311,28 @@
                     modal.find('#category').html(response.name_category)
                     modal.find('#title').html(response.title)
                     modal.find('#description').html(response.description)
-                    modal.find('#created_at').html(response.created_at)
+                    // Format date as dMY (e.g. 15 January 2023)
+                    var date = new Date(response.created_at);
+                    var formattedDate = date.getDate() + ' ' + 
+                        date.toLocaleString('default', { month: 'long' }) + ' ' + 
+                        date.getFullYear() + ' ' +
+                        date.toLocaleString('default', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                    modal.find('#created_at').html(formattedDate);
                     modal.find('#created_by').html(response.karyawan)
-                    modal.find('#assign_at').html(response.assign_at)
-                    modal.find('#receive_at').html(response.receive_at)
-                    modal.find('#decline_at').html(response.decline_at)
-                    modal.find('#finish_at').html(response.finish_at)
+                    // Format each date as "d MonthName Year HH:MM:SS" if the date exists
+                    modal.find('#assign_at').html(response.assign_at ? formatDateTime(response.assign_at) : '-')
+                    modal.find('#receive_at').html(response.receive_at ? formatDateTime(response.receive_at) : '-')
+                    modal.find('#decline_at').html(response.decline_at ? formatDateTime(response.decline_at) : '-')
+                    modal.find('#finish_at').html(response.finish_at ? formatDateTime(response.finish_at) : '-')
+
+                    // Helper function to format datetime
+                    function formatDateTime(dateTimeStr) {
+                        var date = new Date(dateTimeStr);
+                        return date.getDate() + ' ' + 
+                            date.toLocaleString('default', { month: 'long' }) + ' ' + 
+                            date.getFullYear() + ' ' +
+                            date.toLocaleString('default', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                    }
 
 
                 }
