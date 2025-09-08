@@ -59,9 +59,10 @@ class Ticket extends CI_Controller {
      public function finishTicket()
      {
          $id_ticket = $this->input->post('id_ticket');
+         $date  = $this->input->post('finish_at');
          $data = [
              'status' => '2',
-             'finish_at' => date('Y-m-d H:i:s'),
+             'finish_at' => date('Y-m-d H:i:s', strtotime($date)),
          ];
          $this->ticket->finishTicket($id_ticket, $data);
          echo json_encode(['status' => 'success']);

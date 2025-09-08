@@ -1,18 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Ticket extends CI_Controller {
+class Ticket extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         cekRole();
         is_login();
         // Load necessary models, libraries, etc.
-        $this->load->model('user/Ticket_model','ticket');
+        $this->load->model('user/Ticket_model', 'ticket');
         $this->load->helper('url');
     }
 
-    public function index() {
+    public function index()
+    {
         // show data ticket 
         $data = [
             'title' => 'Ticket',
@@ -23,12 +26,12 @@ class Ticket extends CI_Controller {
         ];
         $this->load->view('user/user/ticket', $data);
     }
-     // getDataTicket
-     public function getDataTicket($id_ticket)
-     {
-         $ticket = $this->ticket->getDataTicket($id_ticket);
-         echo json_encode($ticket);
-     }
+    // getDataTicket
+    public function getDataTicket($id_ticket)
+    {
+        $ticket = $this->ticket->getDataTicket($id_ticket);
+        echo json_encode($ticket);
+    }
 
     //  addTicket
     public function addTicket()
@@ -41,7 +44,7 @@ class Ticket extends CI_Controller {
             'created_at' => date('Y-m-d H:i:s')
         ];
         $this->db->insert('ticket', $data);
-       echo json_encode(array("status" => 'success'));
+        echo json_encode(array("status" => 'success'));
     }
 
     // cancelTicket
@@ -50,7 +53,19 @@ class Ticket extends CI_Controller {
         $this->db->delete('ticket', ['id_ticket' => $id_ticket]);
         echo json_encode(array("status" => 'success'));
     }
-   
 
+    // finishTicketUser
+    public function finishTicketUser()
+    {
+        $id_ticket = $this->input->post('id_ticket');
+        $finish_at_user = $this->input->post('finish_at_user');
+        $comment_user = $this->input->post('note');
+        $data = [
+            'status' => '3',
+            'finish_at_user' => $finish_at_user,
+            'comment_user' => $comment_user
+        ];
+       $this->db->update('ticket', $data, ['id_ticket' => $id_ticket]);
+        echo json_encode(['status' => 'success']);
+    }
 }
-?>

@@ -75,9 +75,12 @@ function getStatusTicket($status)
 			break;
 
 		case '2':
-			return '<span class="badge bg-success">Done</span>';
+			return '<span class="badge bg-success">Finished (By Technician)</span>';
 			break;
 		case '3':
+			return '<span class="badge bg-success">Finished (By User)</span>';
+			break;
+		case '4':
 			return '<span class="badge bg-danger">Decline</span>';
 			break;
 

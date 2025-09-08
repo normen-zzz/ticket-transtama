@@ -38,7 +38,7 @@
                         <i class="bi bi-plus-circle me-2"></i>Create New Ticket
                     </button>
                 </div>
-                
+
                 <div class="page-content">
                     <div class="row">
                         <div class="col">
@@ -47,11 +47,12 @@
                                     <h5 class="card-title fw-bold" style="color: #9F2840;">
                                         <i class="bi bi-ticket-detailed me-2"></i><?= $subtitle2 ?>
                                     </h5>
-                                    
+
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <!-- Table view (visible on larger screens) -->
+                                    <div class="table-responsive d-none d-md-block">
                                         <table class="table table-hover" id="tblTicket">
                                             <thead class="table-light">
                                                 <tr>
@@ -89,18 +90,28 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="d-flex justify-content-center gap-3">
-                                                                <button type="button" class="btn btn-sm px-3" 
-                                                                    style="background-color: #9F2840; color: white;" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#detailTicket" 
+                                                                <button type="button" class="btn btn-sm px-3"
+                                                                    style="background-color: #9F2840; color: white;"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#detailTicket"
                                                                     data-id_ticket="<?= $ticket1['id_ticket'] ?>">
                                                                     <i class="bi bi-eye fw-bold me-1"></i> View
                                                                 </button>
-                                                                
+
                                                                 <?php if ($ticket1['status'] == '0') { ?>
-                                                                    <button type="button" class="btn btn-sm btn-danger shadow-sm px-3 cancelTicket" 
+                                                                    <button type="button" class="btn btn-sm btn-danger shadow-sm px-3 cancelTicket"
                                                                         data-id_ticket="<?= $ticket1['id_ticket'] ?>">
                                                                         <i class="bi bi-x-circle fw-bold me-1"></i> Cancel
+                                                                    </button>
+                                                                <?php } ?>
+
+                                                                <?php if ($ticket1['status'] == 2 && strtotime($ticket1['created_at']) >= strtotime('2025-09-05')) { ?>
+                                                                    <button type="button" class="btn btn-sm px-3 btnfinishTicketUser" 
+                                                                        style="background-color: #9F2840; color: white;"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#FinishTicketUser"
+                                                                        data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                        </i>Finish
                                                                     </button>
                                                                 <?php } ?>
                                                             </div>
@@ -111,11 +122,71 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <!-- Card view (visible on mobile screens) -->
+                                    <div class="d-md-none">
+                                        <?php foreach ($ticket->result_array() as $index => $ticket1) { ?>
+                                            <div class="card mb-3 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <span class="badge bg-light-secondary"><?= $ticket1['name_category'] ?></span>
+                                                        <?= getStatusTicket($ticket1['status']) ?>
+                                                    </div>
+
+                                                    <h5 class="card-title fw-bold" style="color: #9F2840;"><?= $ticket1['title'] ?></h5>
+
+                                                    <div class="d-flex align-items-center my-3">
+                                                        <div class="avatar avatar-sm me-2">
+                                                            <div class="avatar-text rounded-circle bg-light-primary">
+                                                                <?= strtoupper(substr($ticket1['karyawan'], 0, 1)) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <small class="text-muted">Created by</small>
+                                                            <p class="mb-0"><?= $ticket1['karyawan'] ?></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Created at</small>
+                                                        <p class="mb-0"><?= $ticket1['created_at'] ?></p>
+                                                    </div>
+
+                                                    <div class="d-flex gap-2 mt-3">
+                                                        <button type="button" class="btn btn-sm flex-fill"
+                                                            style="background-color: #9F2840; color: white;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#detailTicket"
+                                                            data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                            <i class="bi bi-eye fw-bold me-1"></i> View
+                                                        </button>
+
+                                                        <?php if ($ticket1['status'] == '0') { ?>
+                                                            <button type="button" class="btn btn-sm btn-danger flex-fill cancelTicket"
+                                                                data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                <i class="bi bi-x-circle fw-bold me-1"></i> Cancel
+                                                            </button>
+                                                        <?php } ?>
+
+                                                        <?php if ($ticket1['status'] == 2) { ?>
+                                                            <button type="button" class="btn btn-sm flex-fill btnfinishTicketUser"
+                                                                style="background-color: #9F2840; color: white;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#FinishTicketUser"
+                                                                data-id_ticket="<?= $ticket1['id_ticket'] ?>">
+                                                                <i class="bi bi-check-circle fw-bold me-1"></i> Finish
+                                                            </button>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="alert" style="background-color: rgba(159, 40, 64, 0.1);">
@@ -162,7 +233,7 @@
                         </div>
                         <div class="card-body">
                             <hr class="my-4">
-                            
+
                             <div class="row g-4">
                                 <div class="col-md-6">
                                     <h6 class="fw-bold text-secondary mb-3">Ticket Information</h6>
@@ -181,7 +252,7 @@
                                         <p id="created_at" class="mb-0 ms-4"></p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <h6 class="fw-bold text-secondary mb-3">Processing Timeline</h6>
                                     <div class="mb-2">
@@ -208,15 +279,33 @@
                                     <div class="mb-2">
                                         <div class="d-flex align-items-center mb-1">
                                             <i class="bi bi-flag-fill me-2 text-success"></i>
-                                            <span class="fw-semibold">Completed:</span>
+                                            <span class="fw-semibold">Completed By Technician:</span>
                                         </div>
                                         <p id="finish_at" class="mb-0 ms-4"></p>
                                     </div>
+
+                                    <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-flag-fill me-2 text-success"></i>
+                                            <span class="fw-semibold">Completed By User:</span>
+                                        </div>
+                                        <p id="finish_at_user" class="mb-0 ms-4"></p>
+                                    </div>
+
+                                     <div class="mb-2">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="bi bi-flag-fill me-2 text-success"></i>
+                                            <span class="fw-semibold">Comment By User:</span>
+                                        </div>
+                                        <p id="comment_by_user" class="mb-0 ms-4"></p>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
                             <i class="bi bi-x-circle me-2"></i>Close
@@ -289,6 +378,68 @@
         </div>
     </div>
 
+    <!-- FinishTicketUser -->
+    <div class="modal fade" id="FinishTicketUser" tabindex="-1" aria-labelledby="FinishTicketUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #9F2840;">
+                    <h5 class="modal-title text-white fw-bold" id="FinishTicketUserLabel">
+                        <i class="bi bi-check-circle me-2"></i>Finish Ticket
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formFinishTicketUser" class="needs-validation" novalidate>
+                        <input type="hidden" id="id_ticket" name="id_ticket">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td width="30%" class="fw-semibold">
+                                            <label for="finish_at">
+                                                <i class="bi bi-calendar-check me-2" style="color: #9F2840;"></i>Completion Date
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control shadow-sm" id="finish_at_user" name="finish_at_user" placeholder="Select date and time" required>
+                                            <script src="<?= base_url() . '/' ?>assets/extensions/flatpickr/flatpickr.min.js"></script>
+                                            <script>
+                                                flatpickr("#finish_at_user", {
+                                                    enableTime: true,
+                                                    dateFormat: "Y-m-d H:i",
+                                                    defaultDate: "<?= date('Y-m-d H:i') ?>",
+                                                    time_24hr: true
+                                                });
+                                            </script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">
+                                            <label for="note">
+                                                <i class="bi bi-chat-left-text me-2" style="color: #9F2840;"></i>Feedback
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control shadow-sm" id="note" name="note" rows="5" placeholder="Please provide feedback about the resolution of your ticket..." required></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn" style="background-color: #9F2840; color: white;">
+                                <i class="bi bi-check-circle me-2"></i>Confirm Completion
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -338,10 +489,17 @@
                     modal.find('#description').html(response.description)
                     // Format date as dMY (e.g. 15 January 2023)
                     var date = new Date(response.created_at);
-                    var formattedDate = date.getDate() + ' ' + 
-                        date.toLocaleString('default', { month: 'long' }) + ' ' + 
+                    var formattedDate = date.getDate() + ' ' +
+                        date.toLocaleString('default', {
+                            month: 'long'
+                        }) + ' ' +
                         date.getFullYear() + ' ' +
-                        date.toLocaleString('default', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                        date.toLocaleString('default', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                        });
                     modal.find('#created_at').html(formattedDate);
                     modal.find('#created_by').html(response.karyawan)
                     // Format each date as "d MonthName Year HH:MM:SS" if the date exists
@@ -349,14 +507,23 @@
                     modal.find('#receive_at').html(response.receive_at ? formatDateTime(response.receive_at) : '-')
                     modal.find('#decline_at').html(response.decline_at ? formatDateTime(response.decline_at) : '-')
                     modal.find('#finish_at').html(response.finish_at ? formatDateTime(response.finish_at) : '-')
+                    modal.find('#finish_at_user').html(response.finish_at_user ? formatDateTime(response.finish_at_user) : '-')
+                    modal.find('#comment_by_user').html(response.comment_user ? response.comment_user : '-')
 
                     // Helper function to format datetime
                     function formatDateTime(dateTimeStr) {
                         var date = new Date(dateTimeStr);
-                        return date.getDate() + ' ' + 
-                            date.toLocaleString('default', { month: 'long' }) + ' ' + 
+                        return date.getDate() + ' ' +
+                            date.toLocaleString('default', {
+                                month: 'long'
+                            }) + ' ' +
                             date.getFullYear() + ' ' +
-                            date.toLocaleString('default', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                            date.toLocaleString('default', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                second: '2-digit',
+                                hour12: false
+                            });
                     }
 
 
@@ -480,6 +647,66 @@
                             )
                         }
                     })
+                }
+            })
+        });
+    </script>
+
+    <!-- btnfinishTicketUser -->
+    <script>
+        $(document).on('click', '.btnfinishTicketUser', function() {
+            var id_ticket = $(this).data('id_ticket')
+            $('#id_ticket').val(id_ticket)
+        });
+    </script>
+
+    <!-- formFinishTicketUser -->
+    <script>
+        $('#formFinishTicketUser').on('submit', function(e) {
+            e.preventDefault()
+            // swal loading 
+            Swal.fire({
+                title: 'Please Wait!',
+                html: 'Loading...',
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+            $.ajax({
+                url: "<?= base_url('user/ticket/finishTicketUser') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            'Success!',
+                            'Ticket has been marked as finished.',
+                            'success'
+                        ).then((result) => {
+                            Swal.fire({
+                                title: 'Please Wait!',
+                                html: 'Loading...',
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            })
+                            location.reload()
+                        })
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'There was an error marking the ticket as finished.',
+                            'error'
+                        )
+                    }
+                },
+                error: function() {
+                    Swal.fire(
+                        'Error!',
+                        'There was an error processing your request.',
+                        'error'
+                    )
                 }
             })
         });
