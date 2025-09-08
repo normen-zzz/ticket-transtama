@@ -105,7 +105,7 @@
                                                                     </button>
                                                                 <?php } ?>
 
-                                                                <?php if ($ticket1['status'] == 2) { ?>
+                                                                <?php if ($ticket1['status'] == 2 && strtotime($ticket1['created_at']) >= strtotime('2025-09-05')) { ?>
                                                                     <button type="button" class="btn btn-sm px-3 btnfinishTicketUser" 
                                                                         style="background-color: #9F2840; color: white;"
                                                                         data-bs-toggle="modal"
