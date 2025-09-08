@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set('Asia/Jakarta');
+
 class Ticket extends CI_Controller {
 
     public function __construct() {
@@ -62,7 +64,7 @@ class Ticket extends CI_Controller {
          $date  = $this->input->post('finish_at');
          $data = [
              'status' => '2',
-             'finish_at' => date('Y-m-d H:i:s', strtotime($date)),
+             'finish_at' => date('Y-m-d H:i:s'),
          ];
          $this->ticket->finishTicket($id_ticket, $data);
          echo json_encode(['status' => 'success']);

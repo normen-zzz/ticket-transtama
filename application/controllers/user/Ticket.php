@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+date_default_timezone_set('Asia/Jakarta');
 class Ticket extends CI_Controller
 {
 
@@ -47,7 +48,7 @@ class Ticket extends CI_Controller
         echo json_encode(array("status" => 'success'));
     }
 
-    // cancelTicket
+    // cancelTickets
     public function cancelTicket($id_ticket)
     {
         $this->db->delete('ticket', ['id_ticket' => $id_ticket]);
@@ -62,7 +63,7 @@ class Ticket extends CI_Controller
         $comment_user = $this->input->post('note');
         $data = [
             'status' => '3',
-            'finish_at_user' => $finish_at_user,
+            'finish_at_user' => date('Y-m-d H:i:s'),
             'comment_user' => $comment_user
         ];
        $this->db->update('ticket', $data, ['id_ticket' => $id_ticket]);
