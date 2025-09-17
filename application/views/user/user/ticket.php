@@ -289,7 +289,7 @@
                                             <i class="bi bi-flag-fill me-2 text-success"></i>
                                             <span class="fw-semibold">Completed By User:</span>
                                         </div>
-                                        <p id="finish_at_user" class="mb-0 ms-4"></p>
+                                        <p id="finish_at_user_detail" class="mb-0 ms-4"></p>
                                     </div>
 
                                      <div class="mb-2">
@@ -394,25 +394,7 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td width="30%" class="fw-semibold">
-                                            <label for="finish_at">
-                                                <i class="bi bi-calendar-check me-2" style="color: #9F2840;"></i>Completion Date
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control shadow-sm" id="finish_at_user" name="finish_at_user" placeholder="Select date and time" required>
-                                            <script src="<?= base_url() . '/' ?>assets/extensions/flatpickr/flatpickr.min.js"></script>
-                                            <script>
-                                                flatpickr("#finish_at_user", {
-                                                    enableTime: true,
-                                                    dateFormat: "Y-m-d H:i",
-                                                    defaultDate: "<?= date('Y-m-d H:i') ?>",
-                                                    time_24hr: true
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td class="fw-semibold">
                                             <label for="note">
@@ -507,7 +489,7 @@
                     modal.find('#receive_at').html(response.receive_at ? formatDateTime(response.receive_at) : '-')
                     modal.find('#decline_at').html(response.decline_at ? formatDateTime(response.decline_at) : '-')
                     modal.find('#finish_at').html(response.finish_at ? formatDateTime(response.finish_at) : '-')
-                    modal.find('#finish_at_user').html(response.finish_at_user ? formatDateTime(response.finish_at_user) : '-')
+                    modal.find('#finish_at_user_detail').html(response.finish_at_user ? formatDateTime(response.finish_at_user) : '-')
                     modal.find('#comment_by_user').html(response.comment_user ? response.comment_user : '-')
 
                     // Helper function to format datetime

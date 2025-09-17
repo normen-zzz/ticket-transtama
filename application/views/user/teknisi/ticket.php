@@ -93,7 +93,7 @@
                                                                 <?php } ?>
                                                                 <?php if ($ticket1['status'] == '1') { ?>
                                                                     <!-- button open modal finish ticket  -->
-                                                                    <button type="button" class="btn btn-success finishTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>" data-bs-toggle="modal" data-bs-target="#finishTicket">
+                                                                    <button type="button" class="btn btn-success finishTicket" data-id_ticket="<?= $ticket1['id_ticket'] ?>">
                                                                         Finish
                                                                     </button>
                                                                 <?php } ?>
@@ -453,10 +453,60 @@
             })
         });
 
-        // finish ticket with loading after confirm
-        $('.finishTicket').on('click', function() {
+      $('.finishTicket').on('click', function() {
             var id_ticket = $(this).data('id_ticket')
-            $('#id_ticket_finish').val(id_ticket)
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will finish this ticket!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, receive it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // loading swal 
+                    Swal.fire({
+                        title: 'Please Wait!',
+                        html: 'Loading...',
+                        didOpen: () => {
+                            Swal.showLoading()
+                        }
+                    })
+                    $.ajax({
+                        url: "<?= base_url('teknisi/ticket/finishTicket') ?>",
+                        type: 'post',
+                        data: {
+                            id_ticket: id_ticket
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                Swal.fire(
+                                    'Received!',
+                                    'Ticket has been received.',
+                                    'success'
+                                ).then((result) => {
+                                    location.reload()
+                                })
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error receiving the ticket.',
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Error!',
+                                'There was an error processing your request.',
+                                'error'
+                            )
+                        }
+                    })
+                }
+            })
         });
 
         // btnFinishTicket

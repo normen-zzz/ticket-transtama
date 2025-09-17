@@ -10,6 +10,8 @@ class Ticket extends CI_Controller {
         // Load necessary models, libraries, etc.
         $this->load->model('teknisi/Ticket_model','ticket');
         $this->load->helper('url');
+        // date local 
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function index() {
@@ -59,7 +61,7 @@ class Ticket extends CI_Controller {
      public function finishTicket()
      {
          $id_ticket = $this->input->post('id_ticket');
-         $date  = $this->input->post('finish_at');
+         $date  = date('Y-m-d H:i:s');
          $data = [
              'status' => '2',
              'finish_at' => date('Y-m-d H:i:s', strtotime($date)),
