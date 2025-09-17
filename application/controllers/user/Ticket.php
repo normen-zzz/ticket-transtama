@@ -59,7 +59,7 @@ class Ticket extends CI_Controller
     public function finishTicketUser()
     {
         $id_ticket = $this->input->post('id_ticket');
-        $finish_at_user = $this->input->post('finish_at_user');
+        $finish_at_user = date('Y-m-d H:i:s');
         $comment_user = $this->input->post('note');
         $data = [
             'status' => '3',

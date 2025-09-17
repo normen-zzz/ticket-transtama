@@ -289,7 +289,7 @@
                                             <i class="bi bi-flag-fill me-2 text-success"></i>
                                             <span class="fw-semibold">Completed By User:</span>
                                         </div>
-                                        <p id="finish_at_user_date" class="mb-0 ms-4"></p>
+                                        <p id="finish_at_user_detail" class="mb-0 ms-4"></p>
                                     </div>
 
                                      <div class="mb-2">
@@ -489,7 +489,7 @@
                     modal.find('#receive_at').html(response.receive_at ? formatDateTime(response.receive_at) : '-')
                     modal.find('#decline_at').html(response.decline_at ? formatDateTime(response.decline_at) : '-')
                     modal.find('#finish_at').html(response.finish_at ? formatDateTime(response.finish_at) : '-')
-                    modal.find('#finish_at_user_date').html(response.finish_at_user ? formatDateTime(response.finish_at_user) : '-')
+                    modal.find('#finish_at_user_detail').html(response.finish_at_user ? formatDateTime(response.finish_at_user) : '-')
                     modal.find('#comment_by_user').html(response.comment_user ? response.comment_user : '-')
 
                     // Helper function to format datetime
