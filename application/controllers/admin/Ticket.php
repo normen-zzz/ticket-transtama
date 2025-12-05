@@ -106,6 +106,8 @@ class Ticket extends CI_Controller
         $sheet->setCellValue('H1', 'Assign At');
         $sheet->setCellValue('I1', 'Receive At');
         $sheet->setCellValue('J1', 'Finish At');
+        $sheet->setCellValue('K1', 'Finish At (By Requester)');
+        $sheet->setCellValue('L1', 'Comments By Requester');
 
 
 
@@ -128,10 +130,10 @@ class Ticket extends CI_Controller
             $sheet->setCellValue('D' . $no, $ticket1->description);
             if ($ticket1->created_at == NULL) {
                 $sheet->setCellValue('E' . $no, NULL);
-            } else{
+            } else {
                 $sheet->setCellValue('E' . $no, dateToSerial(date('Y-m-d', strtotime($ticket1->created_at))));
             }
-           
+
             $sheet->setCellValue('F' . $no, $ticket1->karyawan);
             $sheet->setCellValue('G' . $no, $ticket1->teknisi);
             if ($ticket1->assign_at == NULL) {
@@ -139,19 +141,28 @@ class Ticket extends CI_Controller
             } else {
                 $sheet->setCellValue('H' . $no, dateToSerial(date('Y-m-d', strtotime($ticket1->assign_at))));
             }
-           
+
             if ($ticket1->receive_at == NULL) {
                 $sheet->setCellValue('I' . $no, NULL);
             } else {
                 $sheet->setCellValue('I' . $no, dateToSerial(date('Y-m-d', strtotime($ticket1->receive_at))));
             }
-           
+
             if ($ticket1->finish_at == NULL) {
                 $sheet->setCellValue('J' . $no, NULL);
-            }else{
+            } else {
                 $sheet->setCellValue('J' . $no, dateToSerial(date('Y-m-d', strtotime($ticket1->finish_at))));
             }
-           
+            if ($ticket1->finish_at_user == NULL) {
+                $sheet->setCellValue('K' . $no, NULL);
+            } else {
+                $sheet->setCellValue('K' . $no, dateToSerial(date('Y-m-d', strtotime($ticket1->finish_at_user))));
+            }
+            if ($ticket1->comment_user == NULL) {
+                $sheet->setCellValue('L' . $no, NULL);
+            } else {
+                $sheet->setCellValue('L' . $no, $ticket1->comment_user);
+            }
             $no++;
         }
 
